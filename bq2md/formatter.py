@@ -1,6 +1,7 @@
 """Format BigQuery schema information as Markdown."""
 
 import logging
+import json
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -42,6 +43,7 @@ class MarkdownFormatter:
         md_lines.append("|-------|------|------|-------------|")
         
         # Fields
+        json_fields = []
         for field in schema_info['fields']:
             name = field['name']
             field_type = field['type']
@@ -49,8 +51,35 @@ class MarkdownFormatter:
             description = field['description'].replace("\n", " ")
             
             md_lines.append(f"| {name} | {field_type} | {mode} | {description} |")
+            
+            # Track JSON fields for detailed display later
+            if field_type == "JSON" and "json_schema" in field:
+                json_fields.append(field)
         
         md_lines.append("")
+        
+        # Add detailed JSON field information if available
+        for field in json_fields:
+            md_lines.append(f"### JSON Field: {field['name']}")
+            md_lines.append("")
+            
+            # Add JSON schema
+            md_lines.append("#### Schema")
+            md_lines.append("```json")
+            md_lines.append(json.dumps(field['json_schema'], indent=2))
+            md_lines.append("```")
+            md_lines.append("")
+            
+            # Add sample values
+            if "json_samples" in field and field["json_samples"]:
+                md_lines.append("#### Sample Values")
+                for i, sample in enumerate(field["json_samples"], 1):
+                    md_lines.append(f"**Sample {i}:**")
+                    md_lines.append("```json")
+                    md_lines.append(json.dumps(sample, indent=2))
+                    md_lines.append("```")
+                    md_lines.append("")
+        
         return "\n".join(md_lines)
     
     @staticmethod

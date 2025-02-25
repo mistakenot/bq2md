@@ -10,6 +10,7 @@ python = "^3.13"
 click = "^8.1.7"
 google-cloud-bigquery = "^3.21.0"
 python-dotenv = "^1.0.1"
+genson = "^1.2.2"
 
 [tool.poetry.scripts]
 bq2md = "bq2md.cli:main"
