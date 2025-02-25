@@ -62,7 +62,7 @@ The tool extracts comprehensive schema information:
 
 ## Requirements
 
-- Python 3.13+
+- Python 3.12+
 - Google Cloud credentials with BigQuery access
 - Access to the BigQuery datasets you want to document
 

@@ -6,7 +6,7 @@ authors = ["charlie <charles@a.team>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.12"
 click = "^8.1.7"
 google-cloud-bigquery = "^3.21.0"
 python-dotenv = "^1.0.1"
