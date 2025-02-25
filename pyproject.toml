@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "bq2md"
+version = "0.1.0"
+description = "A tool to convert BigQuery table schemas to Markdown format"
+authors = ["charlie <charles@a.team>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+click = "^8.1.7"
+google-cloud-bigquery = "^3.21.0"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.scripts]
+bq2md = "bq2md.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
